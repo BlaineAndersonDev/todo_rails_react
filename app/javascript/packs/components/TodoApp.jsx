@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import axios from "axios";
 
+import TodoItems from "./TodoItems";
+import TodoItem from "./TodoItem";
 // First we create a getTodoItems method that hits our API's index action at /api/v1/todo_items.
 // If the request is successful, we load that data into state via this.setState({ todoItems });, otherwise we log the error.
 // Then, we call getTodoItems() when the < TodoApp > component loads via the componentDidMount() call.
@@ -30,7 +32,13 @@ class TodoApp extends React.Component {
       });
   }
   render() {
-    return <p>TodoApp</p>
+    return (
+      <TodoItems>
+        {this.state.todoItems.map(todoItem => (
+          <TodoItem key={todoItem.id} todoItem={todoItem} />
+        ))}
+      </TodoItems>
+    );
   }
 }
 
